@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Parcs from "./pages/Parcs";
 import Bookings from "./pages/Bookings";
+import { SnackbarProvider } from "./contexts/SnackBarContext";
 
 const queryClient = new QueryClient();
 
@@ -16,14 +17,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/users" element={<Users />} />
-             <Route path="/parcs" element={<Parcs />} />
-            <Route path="/bookings" element={<Bookings />} />
-          </Routes>
-        </Router>
+        <SnackbarProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/parcs" element={<Parcs />} />
+              <Route path="/bookings" element={<Bookings />} />
+            </Routes>
+          </Router>
+        </SnackbarProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

@@ -9,30 +9,32 @@ const api = axios.create({
 
 // Fetch Users
 export const fetchUsers = async () => {
-  const response = await api.get("/1/users");
-  return response.data;
-};
-
-// Fetch Users by ID
-export const fetchUsersById = async (id: string) => {
-  const response = await api.get(`/1/users/${id}`);
-  return response.data;
+  try {
+    const response = await api.get("/1/userss");
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Failed to fetch users");
+  }
 };
 
 // Fetch Parcs
 export const fetchParcs = async () => {
-  const response = await api.get("/1/parcs");
-  return response.data;
+  try {
+    const response = await api.get("/1/parcss");
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Failed to fetch parcs");
+  }
 };
-
-// Fetch Parcs by ID
-export const fetchParcsById = async (id: string) => {
-  const response = await api.get(`/1/parcs/${id}`);
-  return response.data;
-}
 
 // Fetch Bookings
 export const fetchBookings = async () => {
-  const response = await api.get("/1/bookings");
-  return response.data;
+  try {
+    const response = await api.get("/1/bookingss");
+    return response.data;
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch bookings"
+    );
+  }
 };

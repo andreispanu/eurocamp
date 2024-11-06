@@ -3,12 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchBookings, fetchUsers, fetchParcs } from "../../services/api";
 import ReusableTable from "../../components/ReusableTable";
 import { format } from "date-fns";
-import {  Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import PageHeader from "../../components/PageHeader";
 import theme from "../../theme";
+import { useSnackbar } from "../../contexts/SnackBarContext";
+import ReusableLoader from "../../components/ReusableLoader";
 
 const Bookings: React.FC = () => {
+  const { showError } = useSnackbar();
+
   const {
     data: bookingsData,
     isLoading: bookingsLoading,
@@ -18,19 +22,43 @@ const Bookings: React.FC = () => {
     queryFn: fetchBookings,
   });
 
-  const { data: usersData } = useQuery({
+  const {
+    data: usersData,
+    isLoading: usersLoading,
+    error: usersError,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
 
-  const { data: parcsData } = useQuery({
+  const {
+    data: parcsData,
+    isLoading: parcsLoading,
+    error: parcsError,
+  } = useQuery({
     queryKey: ["parcs"],
     queryFn: fetchParcs,
   });
 
-  if (bookingsLoading) return <div>Loading...</div>;
-  if (bookingsError instanceof Error)
-    return <div>Error: {bookingsError.message}</div>;
+  if (usersLoading || parcsLoading || bookingsLoading) {
+    return (
+      <ReusableLoader />
+    );
+  }
+
+  if (
+    bookingsError instanceof Error ||
+    usersError instanceof Error ||
+    parcsError instanceof Error
+  ) {
+    const errorMessage =
+      bookingsError?.message ||
+      usersError?.message ||
+      parcsError?.message ||
+      "An unexpected error occurred.";
+
+    showError(errorMessage);
+  }
 
   const getUserNameById = (userId: string) => {
     const user = usersData?.data.find((u: any) => u.id === userId);
@@ -59,29 +87,37 @@ const Bookings: React.FC = () => {
   };
 
   const handleAddBooking = () => {
-    console.log('Add new booking');
+    console.log("Add new booking");
   };
 
   return (
-    <Container>
-      <Grid container>
-        <Grid size={12}>
-          <PageHeader
-            title="Bookings"
-            buttonLabel="Add Booking"
-            buttonAction={handleAddBooking}
-            buttonColor="secondary"
-          />
-        </Grid>
-        <Grid size={12} pb={theme.spacing(2)}>
-          <ReusableTable
-            data={transformedBookings || []}
-            columns={availableColumns}
-            onDelete={handleDelete}
-          />
-        </Grid>
-      </Grid>
-    </Container>
+    <>
+      {bookingsError || usersError || parcsError ? (
+        <Typography color="error" sx={{ mt: 4, textAlign: "center" }}>
+          Error loading data. Please try again later.
+        </Typography>
+      ) : (
+        <Container>
+          <Grid container>
+            <Grid size={12}>
+              <PageHeader
+                title="Bookings"
+                buttonLabel="Add Booking"
+                buttonAction={handleAddBooking}
+                buttonColor="secondary"
+              />
+            </Grid>
+            <Grid size={12} pb={theme.spacing(2)}>
+              <ReusableTable
+                data={transformedBookings || []}
+                columns={availableColumns}
+                onDelete={handleDelete}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      )}
+    </>
   );
 };
 

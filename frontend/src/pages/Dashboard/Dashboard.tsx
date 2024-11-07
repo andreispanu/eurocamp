@@ -13,7 +13,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Container >
+      <Container data-testid="dashboard-container">
         <Grid
           container
           spacing={3}

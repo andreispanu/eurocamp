@@ -40,6 +40,7 @@ The principles and technologies that i have used are part of the modern ecosyste
 >Using Material UI has dramatically improved the speed with which I was able to construct the UI elements as we are relying on a platform that is well maintained, secure, well documented and has features like accessibility in mind already included. The design is also responsive, Mobile first so the application can be accessed on different devices. Other systems that can be used are building up components and customizing them by using Tailwind Css and also creating a Component Library which would be the basis for a reusable and easily maintainable and consistent apps cluster. The components can also be uploaded into Storybook so different stakeholders can have access to it.  
 >Using libraries like React Query / Axios has certainly sped up the comunication with the API while providing a layer of security and quick, easy handling of the common issues/features. By using React Query the catching is already built into the mechanism, also the error handling is very easy to implement. Will no longer need to use the useeffect hook to fetch the data and then build different scenarios for on caching for example. 
 >I have not used it here but Next js is a very good option as a React framework that is using SSR (for dynamic pages) and SSG (for static pages ) also is recommended for cases where SEO optimization is required. 
+>Testing libraries like Cypress will improve the stability of the app and ensure future updates are prevented from introducing any bugs or breaking the application. 
 
 
 --Test section 3:
@@ -60,6 +61,4 @@ After the form validation passes the user name / email will be picked up and sen
 
 I have reused as many components as possible: tables, buttons, cards, page description (called header) section, etc. so this helped in creating the app sections very quickly.
 CRUD operations are being performed with React Query hence catching is handled by it automatically. When a Create/Delete operation has been performed, the query is invalidated hence React Query will pull the new data and the table will be updated.
-
-Handling the API errors has been embeded in the 
 

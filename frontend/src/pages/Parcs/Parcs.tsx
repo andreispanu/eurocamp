@@ -30,9 +30,9 @@ const Parcs = () => {
   };
 
   if (isLoading) return <ReusableLoader />;
+  
   if (parcsError instanceof Error) {
     const errorMessage = parcsError?.message || "An unexpected error occurred.";
-
     showError(errorMessage);
   }
 

@@ -62,3 +62,7 @@ After the form validation passes the user name / email will be picked up and sen
 I have reused as many components as possible: tables, buttons, cards, page description (called header) section, etc. so this helped in creating the app sections very quickly.
 CRUD operations are being performed with React Query hence catching is handled by it automatically. When a Create/Delete operation has been performed, the query is invalidated hence React Query will pull the new data and the table will be updated.
 
+Added a few tests for the following components: reusableButton, reusableTable and the Dashboard page. These tests can be run by opening a new terminal tab and then running the "yarn cypress start" command in the frontend folder.
+
+I hope this test will run smoothly on your machine, if there are any issues please let me know.
+Thank you, Andrei

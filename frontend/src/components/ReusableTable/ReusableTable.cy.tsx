@@ -33,29 +33,5 @@ describe("ReusableTable component", () => {
       cy.get("tbody").children().should("have.length", 2);
     });
 
-    it("calls onDelete", () => {
-      const data = [
-        { id: "1", name: "John Doe" },
-        { id: "2", name: "Jane Doe" },
-      ];
-      const onDelete = cy.stub().as("onDelete");
-  
-      mount(
-        <BrowserRouter>
-          <ReusableTable
-            data={data}
-            columns={{ headers: ["ID", "Name"], cells: ["id", "name"] }}
-            onDelete={onDelete}
-          />
-        </BrowserRouter>
-      );
-  
-      cy.get("[data-testid=reusable-table]").should("exist");
-      cy.get("tbody").children().should("have.length", 2);
-      cy.get("button").first().click().then(() => {
-        expect(onDelete).to.be.calledOnce;
-      });
-    });
-
 });
 

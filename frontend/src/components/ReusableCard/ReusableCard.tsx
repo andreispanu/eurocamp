@@ -8,7 +8,7 @@ const ReusableCard: React.FC<ReusableCardProps> = ({
   onClick,
 }) => {
   return (
-    <Card onClick={onClick} sx={{ cursor: "pointer", borderRadius: "20px" }}>
+    <Card onClick={onClick} sx={{ cursor: "pointer", borderRadius: "20px" }} data-testid="reusable-card">
       <CardContent sx={{ textAlign: "center" }}>
         <Typography variant="h5" fontWeight={"medium"}>
           {title}

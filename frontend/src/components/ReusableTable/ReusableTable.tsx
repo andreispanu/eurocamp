@@ -13,7 +13,7 @@ import { ReusableTableProps } from './ReusableTable.types';
 
 const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns, onDelete }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} data-testid="reusable-table">
       <Table>
         <TableHead>
           <TableRow>

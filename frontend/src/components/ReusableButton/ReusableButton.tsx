@@ -21,6 +21,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
 }) => {
   return (
     <Button
+      data-testid="reusable-button"
       color={color ?? "primary"}
       variant="contained"
       onClick={action}
